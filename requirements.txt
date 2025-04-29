@@ -1,0 +1,12 @@
+fastapi>=0.104.1
+uvicorn>=0.24.0
+pydantic>=2.5.1
+python-multipart>=0.0.6
+python-dotenv>=1.0.0
+opencv-python>=4.8.1.78
+pytesseract>=0.3.10
+numpy>=1.26.2
+pytest>=7.4.3
+httpx>=0.25.1
+Pillow>=10.0.0  # For image handling
+scikit-image>=0.21.0  # For advanced image processing
