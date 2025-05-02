@@ -18,6 +18,19 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Configure Tesseract path from environment variable or use default
+TESSERACT_PATH = os.environ.get("TESSERACT_PATH", "/usr/bin/tesseract")
+pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
+
+# Check for Tesseract availability at startup
+try:
+    tesseract_version = pytesseract.get_tesseract_version()
+    logger.info(f"Tesseract OCR available (version: {tesseract_version})")
+except Exception as e:
+    logger.error(f"Tesseract OCR not available: {str(e)}")
+    logger.error(f"Tesseract path is set to: {TESSERACT_PATH}")
+    logger.error("Please ensure Tesseract is installed correctly")
+
 # Initialize FastAPI app
 app = FastAPI(
     title="OCR Image Processing API",
@@ -38,9 +51,26 @@ app.add_middleware(
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
+
 @app.get("/")
 async def root():
-    return {"message": "OCR Image Processing API. Use /docs for API documentation."}
+    """Health check endpoint that also confirms Tesseract availability"""
+    try:
+        tesseract_version = pytesseract.get_tesseract_version()
+        return {
+            "message": "OCR Image Processing API is running",
+            "status": "healthy",
+            "tesseract_version": str(tesseract_version),
+            "docs_url": "/docs"
+        }
+    except Exception as e:
+        logger.error(f"Health check failed: {str(e)}")
+        return {
+            "message": "OCR Image Processing API is running but Tesseract is not available",
+            "status": "degraded",
+            "error": str(e),
+            "docs_url": "/docs"
+        }
 
 @app.post("/ocr/", response_model=dict)
 async def process_image(file: UploadFile = File(...)):
@@ -146,4 +176,5 @@ async def process_multiple_images(files: List[UploadFile] = File(...)):
     return results
 
 if __name__ == "__main__":
-    uvicorn.run("app:app", host="0.0.0.0", port=8000, reload=True)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run("app:app", host="0.0.0.0", port=port, reload=True)
