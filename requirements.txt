@@ -1,12 +1,33 @@
-fastapi>=0.104.1
-uvicorn>=0.24.0
-pydantic>=2.5.1
-python-multipart>=0.0.6
-python-dotenv>=1.0.0
-opencv-python>=4.8.1.78
-pytesseract>=0.3.10
-numpy>=1.26.2
-pytest>=7.4.3
-httpx>=0.25.1
-Pillow>=10.0.0  # For image handling
-scikit-image>=0.21.0  # For advanced image processing
+# requirements.txt
+
+# FastAPI and server components
+fastapi==0.110.0
+uvicorn==0.29.0
+gunicorn==21.2.0
+python-multipart==0.0.9  # For handling file uploads
+# pydantic==2.6.1  # For data validation
+
+# Image processing
+pillow==10.4.0  # For image handling (PIL/Pillow)
+pytesseract==0.3.10  # Python wrapper for Tesseract OCR
+
+# Utilities
+python-dotenv==1.0.0  # For environment variable management
+requests==2.31.0  # For client-side API requests
+pytest==7.4.3  # For testing (optional)
+httpx==0.26.0  # For async HTTP requests (useful for testing)
+
+# Logging and monitoring
+loguru==0.7.2  # Enhanced logging (optional)
+
+# CORS and middleware
+starlette==0.36.3  # CORS and other middleware capabilities
+
+# Security (optional but recommended for production)
+python-jose==3.3.0  # For JWT token handling
+passlib==1.7.4  # For password hashing
+bcrypt==4.0.1  # For password hashing
+
+# Additional utilities
+uuid==1.30  # For generating unique IDs
+aiofiles==23.2.1  # For asynchronous file operations
