@@ -1,4 +1,4 @@
-# Bajaj Data Science Q2
+# Medical Reports Text Extraction
 
 A FastAPI-based service for processing and extracting data from medical lab reports using OCR technology.
 
