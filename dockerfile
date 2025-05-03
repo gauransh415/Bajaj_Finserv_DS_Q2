@@ -31,7 +31,7 @@ RUN if [ -f build.sh ]; then chmod +x build.sh; fi
 
 # Default environment variables
 ENV PORT=8000
-ENV TESSERACT_PATH=/usr/bin/tesseract
+ENV TESSERACT_PATH=/opt/homebrew/bin/tesseract
 ENV PYTHONUNBUFFERED=1
 
 # Expose port

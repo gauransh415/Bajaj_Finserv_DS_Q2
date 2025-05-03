@@ -19,7 +19,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Configure Tesseract path from environment variable or use default
-TESSERACT_PATH = os.environ.get("TESSERACT_PATH", "/usr/bin/tesseract")
+TESSERACT_PATH = os.environ.get("TESSERACT_PATH", "/opt/homebrew/bin/tesseract")
 pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
 
 # Check for Tesseract availability at startup

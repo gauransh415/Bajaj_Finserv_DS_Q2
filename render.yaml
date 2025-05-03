@@ -12,7 +12,7 @@ services:
       - key: PYTHONUNBUFFERED
         value: "1"
       - key: TESSERACT_PATH
-        value: /usr/bin/tesseract
+        value: /opt/homebrew/bin/tesseract
       - key: UPLOAD_DIR  # Add this
         value: /app/uploads
     
